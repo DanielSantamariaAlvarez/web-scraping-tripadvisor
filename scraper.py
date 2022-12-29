@@ -15,7 +15,7 @@ async def scrap(base_url, header = header):
     # Initialize a list to store the hotel data
     hotel_data = []
 
-    # Set the number of pages to scrape
+    # Send an HTTP GET request to the website
     response = requests.get(base_url, headers=header)
     # Parse the HTML of the page
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -93,4 +93,4 @@ if __name__ == '__main__':
 
     scrap(base_url=url, header = header)
 
-
+    

@@ -3,7 +3,6 @@ import cities
 import scraper
 import pandas as pd
 from fastapi import FastAPI, Response
-import requests
 
 app = FastAPI()
 
@@ -17,7 +16,6 @@ async def scrape(city_name):
   data = await scrape_data_for_city(city)
   csv_data = await convert_to_csv(data, city)
   csv_data = open(f'{city}-hotels.csv', 'r').read()
-  print('csv_data: ', csv_data)
   return Response(
     csv_data,
     headers={"Content-disposition": f"attachment; filename={city}.csv"}
@@ -38,7 +36,6 @@ async def scrape_data_for_city(city):
 
 async def convert_to_csv(data, city):
   # Convert the data to a CSV file
-  print('data: ', type(data))
   df =  pd.DataFrame(data)
   file =  df.to_csv(f'{city}-hotels.csv', index=False)
   return file
